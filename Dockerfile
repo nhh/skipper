@@ -8,7 +8,7 @@ COPY . /home/auto-pilot/
 
 WORKDIR /home/auto-pilot
 
-RUN gem install bundler
+RUN gem install rake
 
 RUN gem install rubocop
 
