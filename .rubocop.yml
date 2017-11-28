@@ -7,6 +7,10 @@ AllCops:
 Documentation:
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: true
+  Max: 17.5
+
 Metrics/LineLength:
   Enabled: true
   Max: 100

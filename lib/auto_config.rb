@@ -3,7 +3,6 @@ class AutoConfig
 
   require_relative 'auto_template'
   require_relative '../modules/auto_dns'
-  
   attr_accessor :resolves_to
   attr_accessor :key
 
@@ -25,5 +24,9 @@ class AutoConfig
 
   def template
     @config.split('<')[1]
+  end
+
+  def reload_dns_entries
+    @resolves_to = AutoDNS.lookup(service.host)
   end
 end

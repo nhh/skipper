@@ -25,19 +25,7 @@ class AutoPilot
 
   def event_loop
     loop do
-      @configurations.map! do |config|
-        log("#{config.key} Checking for updates...", :INFO)
-        entries = AutoDNS.lookup(config.service.host)
-
-        if config.resolves_to.count != entries.count
-          config.resolves_to = entries
-          update_configuration(config)
-        elsif (config.resolves_to - entries).count.zero?
-          log('No changes detected, skipping.', :INFO)
-        end
-
-        config
-      end
+      check_config
       sleep ENV['INTERVAL'] ||= 60
     end
   end
@@ -63,8 +51,25 @@ class AutoPilot
     log('Your configuration file is not valid!', :CRITICAL)
   end
 
+  def check_config
+    @configurations.map! do |config|
+      log("#{config.key} Checking for updates...", :INFO)
+      if config.resolves_to.count != new_entries(config).count
+        config.reload_dns_entries
+        update_configuration(config)
+      elsif (config.resolves_to - new_entries(config)).count.zero?
+        log('No changes detected, skipping.', :INFO)
+      end
+      config
+    end
+  end
+
   def log(message, errorlevel = :INFO)
     puts "#{Date.today} #{errorlevel.to_s.upcase}: #{message}"
+  end
+
+  def new_entries(config)
+    AutoDNS.lookup(config.service.host)
   end
 end
 
