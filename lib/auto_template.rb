@@ -14,7 +14,7 @@ class AutoTemplate
   private
 
   def content
-    template = File.read(File.join(File.dirname(__FILE__), '..', 'templates', 'available', @config.template_file))
+    template = File.read(File.join(File.dirname(__FILE__), '..', 'templates', @config.template_file))
     ERB.new(template, nil, '-').result(binding)
   end
 

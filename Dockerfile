@@ -8,6 +8,8 @@ COPY . /home/auto-pilot/
 
 WORKDIR /home/auto-pilot
 
+RUN rubocop
+
 RUN chmod +x ./entrypoint.sh
 
 ENTRYPOINT "./entrypoint.sh"

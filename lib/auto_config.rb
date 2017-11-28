@@ -8,26 +8,25 @@ class AutoConfig
   attr_accessor :service
   attr_accessor :domain
   attr_accessor :resolves_to
+  attr_accessor :key
 
-  def initialize(config)
+  def initialize(key, config)
     @config = config
+    @key = key
+    @resolves_to = AutoDNS.lookup(service.host)
   rescue StandardError
     exit 255
   end
 
   def service
-    @service = URI.parse(@config.split('<')[0].split('->')[1])
+    URI.parse(@config.split('<')[0].split('->')[1])
   end
 
   def domain
-    @domain = URI.parse(@config.split('<')[0].split('->')[0])
+    URI.parse(@config.split('<')[0].split('->')[0])
   end
 
   def template_file
-    @template_file = @config.split('<')[1]
-  end
-
-  def resolves_to
-    @resolves_to = AutoDNS.lookup(@service.host)
+    @config.split('<')[1]
   end
 end
