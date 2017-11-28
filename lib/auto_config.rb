@@ -4,7 +4,7 @@ class AutoConfig
   require_relative 'auto_template'
   require_relative '../modules/auto_dns'
 
-  attr_accessor :template_file
+  attr_accessor :template
   attr_accessor :service
   attr_accessor :domain
   attr_accessor :resolves_to
