@@ -6,3 +6,7 @@ AllCops:
     - Gemfile
 Documentation:
   Enabled: false
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 100
