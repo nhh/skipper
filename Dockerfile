@@ -8,7 +8,11 @@ COPY . /home/auto-pilot/
 
 WORKDIR /home/auto-pilot
 
-RUN bundle install
+RUN gem install bundler
+
+RUN gem install rubocop
+
+RUN rubocop
 
 RUN chmod +x ./entrypoint.sh
 
