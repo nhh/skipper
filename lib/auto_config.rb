@@ -3,8 +3,7 @@ class AutoConfig
 
   require_relative 'auto_template'
   require_relative '../modules/auto_dns'
-
-  attr_accessor :template
+  
   attr_accessor :resolves_to
   attr_accessor :key
 
@@ -24,7 +23,7 @@ class AutoConfig
     URI.parse(@config.split('<')[0].split('->')[0])
   end
 
-  def template_file
+  def template
     @config.split('<')[1]
   end
 end
