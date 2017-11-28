@@ -26,7 +26,7 @@ class AutoPilot
   def event_loop
     loop do
       check_config
-      sleep ENV['INTERVAL'] ||= 60
+      sleep ENV['INTERVAL'].to_i ||= 60
     end
   end
 
