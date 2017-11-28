@@ -1,0 +1,30 @@
+version: "3.3"
+services:
+  auto-pilot:
+    build:
+      context: .
+    image: paradoxxger/auto-pilot:v0.0.1
+    environment:
+      - BALANCE_RULE_WEB=http://localhost:8080->http://web<example.conf.erb
+      - BALANCE_RULE_WEB2=http://localhost:8081->http://web2<example.conf.erb
+    networks:
+      frontend:
+        aliases:
+          - auto-pilot
+    ports:
+      - 8080:8080
+      - 8081:8081
+  web:
+    image: nginx:1.13.7
+    networks:
+      frontend:
+        aliases:
+          - web
+  web2:
+    image: nginx:1.13.7
+    networks:
+      frontend:
+        aliases:
+          - web2
+networks:
+  frontend:

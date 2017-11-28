@@ -1,0 +1,19 @@
+upstream <%= @config.service.host %> {
+  <% @config.resolves_to.each do |ip| %>
+    <%= "server #{ip}:#{@config.service.port};" %>
+  <% end %>
+}
+
+server {
+
+  listen <%= @config.domain.port %>;
+  server_name <%= @config.domain.host %>;
+
+  client_header_buffer_size 64k;
+  large_client_header_buffers 4 64k;
+
+  location / {
+      proxy_pass http://<%= @config.service.host %>;
+  }
+
+}
