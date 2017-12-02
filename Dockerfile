@@ -4,13 +4,15 @@ RUN apt-get update
 
 RUN apt-get install ruby -y
 
-RUN gem install rake
+COPY Gemfile /home/skipper/Gemfile
 
-RUN gem install rubocop
+COPY Gemfile.lock /home/skipper/Gemfile.lock
 
-COPY . /home/auto-pilot/
+RUN bundle install
 
-WORKDIR /home/auto-pilot
+COPY . /home/skipper/
+
+WORKDIR /home/skipper/
 
 RUN rubocop
 

@@ -24,6 +24,7 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
+  rake
   rubocop
 
 BUNDLED WITH

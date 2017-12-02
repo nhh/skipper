@@ -59,6 +59,9 @@ class AutoPilot
         update_configuration(config)
       elsif (config.resolves_to - new_entries(config)).count.zero?
         log('No changes detected, skipping.', :INFO)
+      else
+        config.reload_dns_entries
+        update_configuration(config)
       end
       config
     end
