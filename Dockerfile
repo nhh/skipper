@@ -8,6 +8,8 @@ COPY Gemfile /home/skipper/Gemfile
 
 COPY Gemfile.lock /home/skipper/Gemfile.lock
 
+RUN gem install bundle
+
 RUN bundle install
 
 COPY . /home/skipper/
