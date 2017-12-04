@@ -14,3 +14,7 @@ Metrics/AbcSize:
 Metrics/LineLength:
   Enabled: true
   Max: 100
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 15

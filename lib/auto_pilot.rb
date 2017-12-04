@@ -25,7 +25,11 @@ class AutoPilot
 
   def event_loop
     loop do
-      check_config
+      @configurations.map! do |config|
+        log("#{config.key} Checking for updates...", :INFO)
+        check_config(config)
+        config
+      end
       sleep ENV.fetch('INTERVAL', 60).to_i
     end
   end
@@ -51,19 +55,15 @@ class AutoPilot
     log('Your configuration file is not valid!', :CRITICAL)
   end
 
-  def check_config
-    @configurations.map! do |config|
-      log("#{config.key} Checking for updates...", :INFO)
-      if config.resolves_to.count != new_entries(config).count
-        config.reload_dns_entries
-        update_configuration(config)
-      elsif (config.resolves_to - new_entries(config)).count.zero?
-        log('No changes detected, skipping.', :INFO)
-      else
-        config.reload_dns_entries
-        update_configuration(config)
-      end
-      config
+  def check_config(config)
+    if config.resolves_to.count != new_entries(config).count
+      config.reload_dns_entries
+      update_configuration(config)
+    elsif (config.resolves_to - new_entries(config)).count.zero?
+      log('No changes detected, skipping.', :INFO)
+    else
+      config.reload_dns_entries
+      update_configuration(config)
     end
   end
 
