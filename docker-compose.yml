@@ -1,9 +1,9 @@
 version: "3.3"
 services:
-  auto-pilot:
+  skipper:
     build:
       context: .
-    image: paradoxxger/autopilot:v0.0.1
+    image: paradoxxger/skipper:v0.0.1
     environment:
       - BALANCE_RULE_WEB=http://localhost:8080->http://web<example.conf.erb
       - BALANCE_RULE_WEB2=http://localhost:8081->http://web2<example.conf.erb
