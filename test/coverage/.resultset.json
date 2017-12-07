@@ -1,0 +1,67 @@
+{
+  "Unknown Test Framework": {
+    "coverage": {
+    },
+    "timestamp": 1512630427
+  },
+  "Correct config generation": {
+    "coverage": {
+    },
+    "timestamp": 1512553859
+  },
+  "The String class works": {
+    "coverage": {
+    },
+    "timestamp": 1512579812
+  },
+  "The Integer class works": {
+    "coverage": {
+    },
+    "timestamp": 1512579873
+  },
+  "the Integer class works": {
+    "coverage": {
+    },
+    "timestamp": 1512583757
+  },
+  "intialization of the skipper class works": {
+    "coverage": {
+    },
+    "timestamp": 1512580984
+  },
+  "the configuration is empty": {
+    "coverage": {
+    },
+    "timestamp": 1512628364
+  },
+  "blasdjaskjd": {
+    "coverage": {
+    },
+    "timestamp": 1512581583
+  },
+  "the intialization of the skipper class works": {
+    "coverage": {
+    },
+    "timestamp": 1512628415
+  },
+  "the loading mechanism of env vars works": {
+    "coverage": {
+    },
+    "timestamp": 1512629071
+  },
+  "the intialization of the skipper class": {
+    "coverage": {
+    },
+    "timestamp": 1512629718
+  },
+  "Test the initialization of the skipper class": {
+    "coverage": {
+    },
+    "timestamp": 1512631067
+  },
+  "Test the env handling": {
+    "coverage": {
+    },
+    "timestamp": 1512632079
+  }
+}
