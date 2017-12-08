@@ -1,4 +1,4 @@
-module AutoScheduler
+module Scheduler
   def self.reload_nginx
     system 'nginx -s reload'
   rescue SystemCallError

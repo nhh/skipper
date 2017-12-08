@@ -1,29 +1,39 @@
-class AutoPilot
+class Skipper
   $stdout.sync = true
   require 'uri'
   require 'time'
 
-  require_relative '../modules/auto_dns'
-  require_relative '../modules/auto_scheduler'
+  require_relative '../modules/dns'
+  require_relative '../modules/scheduler'
 
-  require_relative 'auto_config'
-  require_relative 'auto_template'
+  require_relative 'config'
+  require_relative 'template'
+
+  attr_accessor :configurations
 
   def initialize
     @configurations = []
-
-    ENV.each do |key, config|
-      if key.start_with? 'BALANCE_RULE'
-        log("Loading #{key} conf", :INFO)
-        create_configuration(key, config)
-      end
-    end
-    event_loop
   end
 
-  private
+  def load_env_variables
+    ENV.each do |key, config|
+      next unless key.start_with? 'BALANCE_RULE'
+      log("Loading #{key} conf", :INFO)
+      auto_config = Config.new(key, config)
+      @configurations << auto_config
+    end
+  end
 
-  def event_loop
+  def create_initial_config
+    exit 255 if @configurations.empty?
+    @configurations.each do |config|
+      auto_template = Template.new(config)
+      auto_template.write_config
+      apply_configuration
+    end
+  end
+
+  def update_loop
     loop do
       @configurations.map! do |config|
         log("#{config.key} Checking for updates...", :INFO)
@@ -34,23 +44,17 @@ class AutoPilot
     end
   end
 
-  def create_configuration(key, config)
-    auto_config = AutoConfig.new(key, config)
-    @configurations << auto_config
-    auto_template = AutoTemplate.new(auto_config)
-    auto_template.write_config
-    apply_configuration
-  end
+  private
 
   def update_configuration(config)
     log("#{config.key} Applying #{config.resolves_to.count} hosts!", :INFO)
-    AutoTemplate.new(config).write_config
+    Template.new(config).write_config
     apply_configuration
   end
 
   def apply_configuration
-    AutoScheduler.validate_configuration
-    AutoScheduler.reload_nginx
+    Scheduler.validate_configuration
+    Scheduler.reload_nginx
   rescue SystemCallError
     log('Your configuration file is not valid!', :CRITICAL)
   end
@@ -72,8 +76,6 @@ class AutoPilot
   end
 
   def new_entries(config)
-    AutoDNS.lookup(config.service.host)
+    Dns.lookup(config.service.host)
   end
 end
-
-AutoPilot.new

@@ -1,7 +1,9 @@
-require_relative 'spectre'
+require 'spectr'
 require_relative '../lib/skipper'
+require_relative '../lib/config'
 
-Spectre.new.test 'Test the initialization of the skipper class' do |test|
+Spectr.new.test 'Test the initialization of the skipper class' do |test|
+
   skipper = Skipper.new
 
   test.assume('the skipper class exists', true) do
@@ -28,6 +30,10 @@ Spectre.new.test 'Test the env handling' do |test|
 
   test.assume('configuration array holds exactly one object', 1) do
     skipper.configurations.count
+  end
+
+  test.assume('the first in configuration array is Config', 1) do
+    skipper.configurations[0].is_a?(Config)
   end
 
 end

@@ -1,15 +1,15 @@
-class AutoConfig
+class Config
   require 'uri'
 
-  require_relative 'auto_template'
-  require_relative '../modules/auto_dns'
+  require_relative 'template'
+  require_relative '../modules/dns'
   attr_accessor :resolves_to
   attr_accessor :key
 
   def initialize(key, config)
     @config = config
     @key = key
-    @resolves_to = AutoDNS.lookup(service.host)
+    @resolves_to = Dns.lookup(service.host)
   rescue StandardError
     exit 255
   end
@@ -27,6 +27,6 @@ class AutoConfig
   end
 
   def reload_dns_entries
-    @resolves_to = AutoDNS.lookup(service.host)
+    @resolves_to = Dns.lookup(service.host)
   end
 end

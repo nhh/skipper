@@ -1,4 +1,4 @@
-module AutoDNS
+module Dns
   require 'resolv'
   require 'set'
 

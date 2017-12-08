@@ -1,4 +1,4 @@
-class AutoTemplate
+class Template
   require 'erb'
   require 'fileutils'
   require 'base64'
