@@ -14,6 +14,6 @@ RUN spectr test/*
 
 RUN rubocop
 
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x entrypoint
 
-ENTRYPOINT "./entrypoint.sh"
+ENTRYPOINT "entrypoint"
