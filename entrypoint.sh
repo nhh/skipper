@@ -2,5 +2,4 @@
 
 nginx
 
-ruby lib/auto_pilot.rb
-
+ruby lib/skipper.rb
