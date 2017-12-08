@@ -3,7 +3,6 @@ require_relative '../lib/config'
 require 'uri'
 
 Spectr.new.test 'the configuration class' do |test|
-
   ENV['BALANCE_RULE_TEST'] = 'http://localhost:8080->http://web<example.conf.erb'
 
   config = Config.new('BALANCE_RULE_TEST', ENV['BALANCE_RULE_TEST'])
@@ -31,5 +30,4 @@ Spectr.new.test 'the configuration class' do |test|
   test.assume('the config template is example.conf.erb', 'example.conf.erb') do
     config.template
   end
-
 end
