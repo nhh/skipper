@@ -1,5 +1,4 @@
 class Skipper
-  $stdout.sync = true
   require 'uri'
   require 'time'
 

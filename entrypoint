@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+$stdout.sync = true
+
+require_relative 'lib/skipper'
+
+system 'nginx'
+
+skipper = Skipper.new
+
+skipper.load_env_variables
+skipper.create_initial_config
+skipper.update_loop
