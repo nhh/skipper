@@ -1,31 +1,28 @@
-# Autopilot
+# Skipper
 ### A self configuring nginx built for docker-compose usage.
 
-Build status:
+![alt text](https://teamcity.german-rush-company.de/app/rest/builds/buildType:(id:Essential_Build)/statusIcon "Build status") 
+[![Maintainability](https://api.codeclimate.com/v1/badges/9fd18f74f0da78b7508a/maintainability)](https://codeclimate.com/github/ParadoXxGER/skipper/maintainability)
+[![Coverage Status](https://coveralls.io/repos/github/ParadoXxGER/skipper/badge.svg?branch=master)](https://coveralls.io/github/ParadoXxGER/skipper?branch=master)
+
+The Balance rules in detail:
+
+The first part until `->` is the virtual host, nginx should listen on. In this case `localhost:8080`. After `->` you can define your linked service. 
+Note: The `web` is a alias in the docker network, means it points to the service  `web`.
+
+`BALANCE_RULE_WEB=URI->URI<CONFIG.FILE`
+
+`BALANCE_RULE_WEB=http://localhost:8080->http://web<example.conf.erb`
 
 #### Basic usage:
-
-Autopilot is designed for usage with docker-compose. But you can even run the image without a compose file:
-
-`docker run -it -p 8080:8080 -e BALANACE_RULE_WEB='http://localhost:8080->http://your-web-service:3000<example.conf.erb' paradoxxger/autopilot:v-X.X.X`
-
-This runs the container with the following configuration:
-
-Pseudocode: "Balance all incoming traffic on "http://localhost:8080" to "http://your-web-service:3000" with the nginx template "example.conf.erb"."
-
-The container will constantly check if there are more or less dns entries given for "your-web-service", if so it will reload the configuration and restart nginx gracefully.
-
-Please make sure, that the port mapping of the autopilot matches the given incoming traffic port (8080).
-
-Now we are gonna launch a compose file, which has two routes pointing to autopilot. Yep, you can define multiple BALANCE_RULES:
 
 ```
 version: "3.3"
 services:
-  auto-pilot:
+  skipper:
     build:
       context: .
-    image: paradoxxger/autopilot:v0.0.1
+    image: paradoxxger/skipper:v0.0.1
     environment:
       - BALANCE_RULE_WEB=http://localhost:8080->http://web<example.conf.erb
       - BALANCE_RULE_WEB2=http://localhost:8081->http://web2<example.conf.erb
@@ -53,8 +50,9 @@ networks:
   frontend:
 ```
 
-We managed to get two sources auto looked up and served via autopilot. With running this compose file you should be able to access
-your localhost:8081 and localhost:8080 both displaying the default nginx html page provided by service web and web2.
+If you run this compose, you should be able to access `localhost:8080` and `localhost:8081`.
 
-#### Advanced usage:
+Now, scale your services and watch skipper creating new config files and gracefully reloading nginx.
+
+`docker-compose scale web=5`
 
