@@ -16,4 +16,4 @@ RUN rubocop
 
 RUN chmod +x entrypoint
 
-ENTRYPOINT "entrypoint"
+ENTRYPOINT "./entrypoint"
