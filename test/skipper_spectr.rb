@@ -16,7 +16,7 @@ Spectr.new.test 'Test the initialization of the skipper class' do |test|
 
 end
 
-Spectre.new.test 'Test the env handling' do |test|
+Spectr.new.test 'Test the env handling' do |test|
 
   skipper = Skipper.new
 
@@ -32,7 +32,7 @@ Spectre.new.test 'Test the env handling' do |test|
     skipper.configurations.count
   end
 
-  test.assume('the first in configuration array is Config', 1) do
+  test.assume('the first in configuration array is Config', true) do
     skipper.configurations[0].is_a?(Config)
   end
 

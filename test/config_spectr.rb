@@ -1,8 +1,8 @@
-require_relative 'spectre'
+require 'spectr'
 require_relative '../lib/config'
 require 'uri'
 
-Spectre.new.test 'the configuration class' do |test|
+Spectr.new.test 'the configuration class' do |test|
 
   ENV['BALANCE_RULE_TEST'] = 'http://localhost:8080->http://web<example.conf.erb'
 
