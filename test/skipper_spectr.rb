@@ -28,5 +28,4 @@ Spectr.new.test 'Test the initialization of the skipper class' do |test|
   test.assume('The first in configuration array is Config', true) do
     skipper.configurations[0].is_a?(Config)
   end
-
 end
