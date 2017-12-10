@@ -5,11 +5,11 @@ require_relative '../lib/config'
 Spectr.new.test 'Test the initialization of the skipper class' do |test|
   skipper = Skipper.new
 
-  test.assume('the skipper class exists', true) do
+  test.assume('The skipper class exists', true) do
     skipper.is_a?(Skipper)
   end
 
-  test.assume('the skipper class is not nil', false) do
+  test.assume('The skipper class is not nil', false) do
     skipper.nil?
   end
 end
@@ -21,15 +21,15 @@ Spectr.new.test 'Test the env handling' do |test|
 
   skipper.load_env_variables
 
-  test.assume('configuration array is not null', false) do
+  test.assume('The configuration array is not null', false) do
     skipper.configurations.count.zero?
   end
 
-  test.assume('configuration array holds exactly one object', 1) do
+  test.assume('The configuration array holds exactly one object', 1) do
     skipper.configurations.count
   end
 
-  test.assume('the first in configuration array is Config', true) do
+  test.assume('The first in configuration array is Config', true) do
     skipper.configurations[0].is_a?(Config)
   end
 end

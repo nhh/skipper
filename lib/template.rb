@@ -1,7 +1,6 @@
 class Template
   require 'erb'
   require 'fileutils'
-  require 'base64'
 
   def initialize(auto_config)
     @config = auto_config
@@ -10,8 +9,6 @@ class Template
   def write_config
     File.write(target_file, content)
   end
-
-  private
 
   def content
     template = File.read(File.join(File.dirname(__FILE__), '..', 'templates', @config.template))
