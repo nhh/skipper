@@ -2,7 +2,7 @@
 ### A self configuring nginx built for docker-compose usage.
 
 [![Build status](https://teamcity.german-rush-company.de/app/rest/builds/buildType:(id:skipper)/statusIcon)](https://teamcity.german-rush-company.de/app/rest/builds/buildType:(id:skipper)/statusIcon)
-[![Maintainability](https://api.codeclimate.com/v1/badges/9fd18f74f0da78b7508a/maintainability)](https://codeclimate.com/github/ParadoXxGER/skipper/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9fd18f74f0da78b7508a/maintainability)](https://api.codeclimate.com/v1/badges/9fd18f74f0da78b7508a/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/ParadoXxGER/skipper/badge.svg?branch=master)](https://coveralls.io/github/ParadoXxGER/skipper?branch=master)
 
 The Balance rules in detail:
