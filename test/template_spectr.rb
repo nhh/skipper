@@ -4,7 +4,6 @@ require_relative '../lib/config'
 require_relative '../lib/template'
 
 Spectr.new.test 'Test the template class' do |test|
-
   ENV['BALANCE_RULE_TEST'] = 'http://localhost:8080->http://web<example.conf.erb'
   config = Config.new('BALANCE_RULE_TEST', ENV['BALANCE_RULE_TEST'])
 
@@ -30,4 +29,7 @@ Spectr.new.test 'Test the template class' do |test|
     template.config_name
   end
 
+  test.assume('The target file is /etc/nginx/conf.d/localhost_8080_web.conf', true) do
+    template.target_file == "/etc/nginx/conf.d/#{template.config_name}.conf"
+  end
 end
