@@ -11,8 +11,8 @@ Scheme: `BALANCE_RULE_WEB=URI->URI<CONFIG.FILE`
 
 Example: `BALANCE_RULE_WEB=http://localhost:8080->http://web<example.conf.erb`
 
-The first part until `->` is the virtual host, nginx should listen on. In this case `localhost:8080`. After `->` you can define your linked service. 
-Note: The `web` is a alias in the docker network, means it points to the service  `web`.
+The first part until `->` is the virtual host, nginx should listen on. In this case `localhost:8080`. After `->` you can define your linked service
+which will probably scale up or down. Note: The `web` is a alias in the docker network, means it points to the service  `web`.
 
 `<` Means 'out of' a template. Mount advanced templates on `/home/skipper/templates` and reference them in the configuration.
 
