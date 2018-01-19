@@ -60,3 +60,6 @@ Now, scale your services and watch skipper creating new config files and gracefu
 
 `docker-compose scale web=5`
 
+Todo:
+- Add support for multiple locations per configuration
+
