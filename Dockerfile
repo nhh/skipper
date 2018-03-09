@@ -10,6 +10,10 @@ WORKDIR /home/skipper/
 
 COPY . /home/skipper/
 
+RUN rm /etc/nginx/sites-enabled/default
+
+RUN rm /etc/nginx/conf.d/default.conf
+
 RUN spectr test/*
 
 RUN rubocop

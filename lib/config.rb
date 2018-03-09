@@ -14,10 +14,12 @@ class Config
     exit 255
   end
 
+  # Application service to be proxied
   def service
     URI.parse(@config.split('<')[0].split('->')[1])
   end
 
+  # Domain nginx should listen on
   def domain
     URI.parse(@config.split('<')[0].split('->')[0])
   end
